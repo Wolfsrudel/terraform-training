@@ -1,0 +1,53 @@
+machine:
+  environment:
+    TF_VERSION: 0.9.4
+    PACKER_VERSION: 1.0.0
+    JQ_VERSION: 1.5
+    PATH: ~/bin/${TF_VERSION}:~/bin/${PACKER_VERSION}:~/bin/${JQ_VERSION}:$PATH
+
+    # Location where all Terraform configs are. This can be changed to use different sources.
+    TF_HOME: terraform/demo1
+
+dependencies:
+  cache_directories:
+    - ~/bin/
+  pre:
+    - ./ci/setup.sh
+
+test:
+  override:
+    - terraform validate "$TF_HOME"
+
+deployment:
+  feature:
+    branch: /feature-.*/
+    commands:
+      # Changing directory to where Terraform configs are
+      - cd "$TF_HOME"
+
+      # Initiate backend, get required modules
+      - terraform init -force-copy -input=false -backend=true
+
+      # Run non-interactive plan
+      - terraform plan -refresh=false -input=false -no-color | tee /tmp/plan_output
+
+
+      # - Leave a comment on related pull-request with content of /tmp/plan_output
+      - cd ~
+      - ./ci/post-github-comment-from-cci.sh --message "$(cat /tmp/plan_output)"
+
+      # - (Optionally) Open pull-request to master branch (release candidate)
+
+  master:
+    branch: master
+    owner: antonbabenko
+    commands:
+      - terraform plan
+      - terraform apply ...
+
+  release:
+    tag: /v.*/
+    owner: antonbabenko
+    commands:
+      - terraform plan
+      - terraform apply ...
