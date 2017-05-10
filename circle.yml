@@ -6,7 +6,7 @@ machine:
     PATH: ~/bin/${TF_VERSION}:~/bin/${PACKER_VERSION}:~/bin/${JQ_VERSION}:$PATH
 
     # Location where all Terraform configs are. This can be changed to use different sources.
-    TF_HOME: cd-terraform-demo/terraform/demo1
+    TF_HOME: terraform/demo1
 
 dependencies:
   cache_directories:
@@ -16,7 +16,9 @@ dependencies:
 
 test:
   override:
-    - terraform validate "$TF_HOME"
+    # Changing directory to where Terraform configs are
+    - cd "$TF_HOME"
+    - terraform validate
 
 deployment:
   feature:
