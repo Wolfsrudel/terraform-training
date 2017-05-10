@@ -23,24 +23,30 @@ deployment:
   feature:
     branch: /feature-.*/
     commands:
-      - ./ci/deploy-feature-from-cci.sh
+      - ./ci/plan-from-cci.sh
 
       # Leave a comment on related pull-request with content of /tmp/plan_output
       - ./ci/post-github-comment-from-cci.sh --message "$(cat /tmp/plan_output)"
 
-      # (Optionally) Open pull-request to master branch (release candidate)
+      # Open pull-request to master branch ("release candidate")
       - hub pull-request -b master -h $CIRCLE_BRANCH -m "Feature from $CIRCLE_BRANCH" || true
 
   master:
     branch: master
     owner: antonbabenko
     commands:
-      - terraform plan
-      - terraform apply ...
+      # Run Terraform plan for staging environment (if available)
+      - ./ci/plan-from-cci.sh
+
+      # Run Terraform apply for staging environment (if available)
+      - ./ci/apply-from-cci.sh
 
   release:
     tag: /v.*/
     owner: antonbabenko
     commands:
-      - terraform plan
-      - terraform apply ...
+      # Run Terraform plan for production environment
+      - ./ci/plan-from-cci.sh
+
+      # Run Terraform apply for production environment
+      - ./ci/apply-from-cci.sh

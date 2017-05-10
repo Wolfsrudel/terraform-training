@@ -12,7 +12,7 @@ function assert_env_var_not_empty {
   fi
 }
 
-function deploy_feature_from_cci {
+function terraform_plan_from_cci {
   assert_env_var_not_empty "TF_HOME"
 
   # Changing directory to where Terraform configs are
@@ -27,4 +27,4 @@ function deploy_feature_from_cci {
   echo "Success!"
 }
 
-deploy_feature_from_cci
+terraform_plan_from_cci
