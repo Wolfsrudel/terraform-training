@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Installing dependencies - AWS CLI
-sudo pip install --quiet --upgrade awscli
+pip install --quiet --upgrade awscli pip
 
 # Install Terraform, Packer and jq
 mkdir -p ~/bin/{$TF_VERSION,$PACKER_VERSION,$JQ_VERSION}
