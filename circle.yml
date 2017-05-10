@@ -16,9 +16,7 @@ dependencies:
 
 test:
   override:
-    # Changing directory to where Terraform configs are
-    - cd "$TF_HOME"
-    - terraform validate
+    - terraform validate "$TF_HOME"
 
 deployment:
   feature:
