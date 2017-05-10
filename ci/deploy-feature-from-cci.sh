@@ -24,12 +24,6 @@ function deploy_feature_from_cci {
   # Run non-interactive plan
   terraform plan -refresh=false -input=false -no-color | tee /tmp/plan_output
 
-  # Leave a comment on related pull-request with content of /tmp/plan_output
-  cd ~
-  ./ci/post-github-comment-from-cci.sh --message "$(cat /tmp/plan_output)"
-
-  # (Optionally) Open pull-request to master branch (release candidate)
-
   echo "Success!"
 }
 

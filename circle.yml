@@ -24,6 +24,11 @@ deployment:
     commands:
       - ./ci/deploy-feature-from-cci.sh
 
+      # Leave a comment on related pull-request with content of /tmp/plan_output
+      - ./ci/post-github-comment-from-cci.sh --message "$(cat /tmp/plan_output)"
+
+      # (Optionally) Open pull-request to master branch (release candidate)
+
   master:
     branch: master
     owner: antonbabenko
