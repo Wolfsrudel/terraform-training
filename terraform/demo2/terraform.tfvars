@@ -5,10 +5,10 @@ aws_region = "eu-west-1"
 # Correct way is to create each user individually and don't use interpolation functions there.
 iam_users = [
   "circleci",
-  "user1",
-  "user2",
-  "user3",
-  "user4",
-  "user5",
-  "user6",
+//  "user1",
+//  "user2",
+//  "user3",
+//  "user4",
+//  "user5",
+//  "user6",
 ]
