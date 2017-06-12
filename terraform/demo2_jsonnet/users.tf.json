@@ -1,0 +1,58 @@
+{
+   "output": {
+      "iam_user_access_key_abc": {
+         "value": "${aws_iam_access_key.abc.id} ===  ${aws_iam_access_key.abc.secret}"
+      },
+      "iam_user_access_key_user1": {
+         "value": "${aws_iam_access_key.user1.id} ===  ${aws_iam_access_key.user1.secret}"
+      },
+      "iam_user_access_key_user2": {
+         "value": "${aws_iam_access_key.user2.id} ===  ${aws_iam_access_key.user2.secret}"
+      },
+      "iam_user_access_key_user3": {
+         "value": "${aws_iam_access_key.user3.id} ===  ${aws_iam_access_key.user3.secret}"
+      }
+   },
+   "resource": {
+      "aws_iam_access_key": {
+         "abc": {
+            "user": "abc"
+         },
+         "user1": {
+            "user": "user1"
+         },
+         "user2": {
+            "user": "user2"
+         },
+         "user3": {
+            "user": "user3"
+         }
+      },
+      "aws_iam_group_membership": {
+         "developers": {
+            "group": "${aws_iam_group.developers.name}",
+            "name": "terraform-developers",
+            "users": [
+               "${aws_iam_user.abc.name}",
+               "${aws_iam_user.user1.name}",
+               "${aws_iam_user.user2.name}",
+               "${aws_iam_user.user3.name}"
+            ]
+         }
+      },
+      "aws_iam_user": {
+         "abc": {
+            "name": "abc"
+         },
+         "user1": {
+            "name": "user1"
+         },
+         "user2": {
+            "name": "user2"
+         },
+         "user3": {
+            "name": "user3"
+         }
+      }
+   }
+}
