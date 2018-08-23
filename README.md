@@ -1,8 +1,8 @@
 # Terraform Basics training
 
-This repository contains code for the "Terraform Basics" training.
+This repository contains code for the "Terraform Basics" training (updated for Terraform 0.11).
 
-[Send me an me](mailto:anton@antonbabenko.com) if you are looking for Terraform trainer or mentor.
+[Send me an email](mailto:anton@antonbabenko.com) if you are looking for Terraform trainer or mentor.
 
 Terraform tasks are inside directory `terraform`. Solutions are inside `solutions`.
 
@@ -15,8 +15,6 @@ Terraform tasks are inside directory `terraform`. Solutions are inside `solution
 
 ## Author
 
-[Anton Babenko](https://github.co/antonbabenko), some rights reserved.
-
-Slides for some of my talks and trainings are available [here](https://www.slideshare.net/AntonBabenko/).
+[Anton Babenko](https://github.co/antonbabenko), some rights reserved. Slides for some of my talks and trainings are available [here](https://www.slideshare.net/AntonBabenko/).
 
 Enjoy!
